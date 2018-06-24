@@ -1,0 +1,9 @@
+{
+  "svn":{
+    "root": "http://192.168.111.244:8888/svn/",
+    "designImage": "",
+    "designFile": "",
+    "html": "http://192.168.111.244:8888/svn/aischool/doc/02.组织文档/06.UI组/02.HTML文件/03. 前端项目库",
+    "publish":""
+  }
+}
