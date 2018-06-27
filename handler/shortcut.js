@@ -1,22 +1,8 @@
 // 生成快捷输入键
-const type = 'web'
+const dirs = require('./dirs')
 const fs = require('fs')
 const glob = require('glob')
 const shortcuts = {}
-
-let dirs = []
-
-if (type === 'web') {
-  dirs = [
-    'teewon/apps/web/src/static/style/modules/**/*.vue',
-    'teewon/apps/web/src/assemblies/components/**/demo/*.vue'
-  ]
-} else if (type === 'mobile') {
-  dirs = [
-    'teewon/apps/mobile/src/static/style/modules/**/*.vue',
-    'teewon/apps/mobile/src/assemblies/components/**/demo/*.vue'
-  ]
-}
 
 function generateShortcut (files) {
   files.forEach((file, index) => {

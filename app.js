@@ -18,6 +18,7 @@ app.use('/js', express.static(path.join(__dirname, 'www/js')))
 app.use('/static', express.static(path.join(__dirname, 'www/static')))
 app.use('/docs/config', express.static(path.join(__dirname, 'docs/config')))
 app.use('/docs', express.static(path.join(__dirname, 'docs')))
+app.use('/data', express.static(path.join(__dirname, 'data')))
 
 app.use('/', router)
 
