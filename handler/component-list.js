@@ -1,7 +1,6 @@
 // 生成组件列表
-const dirs = require('./dirs')
 const fs = require('fs')
-const glob = require('glob')
+const getComponentFiles = require('./get-component-files')
 
 function generateComponentsList (files) {
   const group = {}
@@ -39,10 +38,4 @@ function generateComponentsList (files) {
   fs.writeFileSync('data/app/components.json', JSON.stringify(group))
 }
 
-let files = []
-
-dirs.forEach(dir => {
-  files = files.concat(glob.sync(dir))
-})
-
-generateComponentsList(files)
+generateComponentsList(getComponentFiles('*.vue', true))

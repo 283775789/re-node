@@ -45,12 +45,13 @@ router.get('/api/docs/:type/:name', function (req, res, next) {
 
 // 处理css请求
 router.post('/api/css', function (req, res, next) {
-  const scssContent = scss.createScss(req.body) + fs.readFileSync('src/static/style/main.scss')
+  const scssContent = '@import "functions";\n\n' + scss.createScss(req.body) + fs.readFileSync('src/static/style/main.scss')
 
   sass.render({
     data: scssContent,
     includePaths: [
       'src/static/style',
+      'src/static/style/base',
       'src//assemblies/components',
       'src/static/style/modules'
     ],

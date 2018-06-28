@@ -1,12 +1,13 @@
+/**
+ * 生成组件SCSS变量模板
+ */
 const fs = require('fs')
 const process = require('process')
-let varsPath
-let compSassPath
-let varsTemplatePath
+const getComponentFiles = require('./get-component-files')
 
-varsPath = 'templates/scss/web-vars.scss'
-compSassPath = 'templates/apps/web/src/static/css/teewon/'
-varsTemplatePath = 'templates/scss/web-variables.scss'
+let variablesPath = 'teewon/apps/web/src/static/style/base/_variables.scss'
+let scssFiles = getComponentFiles('*.scss')
+let variablesTemplate = 'teewon/scss/web-variables.scss'
 
 // 指定web端组件或移动端组件的scss相关路径
 // if (process.argv[2] === 'web') {
@@ -19,6 +20,7 @@ varsTemplatePath = 'templates/scss/web-variables.scss'
 //   console.error('请指定正确的命令行参数,可选的值为[web],[mobile]')
 // }
 
+// 获取组件变量值
 const getCompVars = function (data) {
   const dataRows = data.split('\n')
   const endReg = /(^\s*$)|(^\s*\/\/)/
@@ -37,14 +39,10 @@ const getCompVars = function (data) {
   }
 }
 
-fs.readdir(compSassPath, function (e, files) {
-  let result = '\n/* ------------------------------ 组件变量 ------------------------------ */\n'
+let result = '\n/* ------------------------------ 组件变量 ------------------------------ */\n'
 
-  files.forEach(filename => {
-    if (/.scss$/.test(filename)) {
-      result += getCompVars(fs.readFileSync(compSassPath + filename, 'utf-8'))
-    }
-  })
-
-  fs.writeFileSync(varsTemplatePath, fs.readFileSync(varsPath, 'utf-8') + result)
+scssFiles.forEach(file => {
+  result += getCompVars(fs.readFileSync(file, 'utf-8'))
 })
+
+fs.writeFileSync(variablesTemplate, fs.readFileSync(variablesPath, 'utf-8').replace(/\s*!default/gm, '') + result)

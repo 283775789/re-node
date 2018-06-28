@@ -1,8 +1,7 @@
 // 生成快捷输入键
-const dirs = require('./dirs')
 const fs = require('fs')
-const glob = require('glob')
 const shortcuts = {}
+const getComponentFiles = require('./get-component-files')
 
 function generateShortcut (files) {
   files.forEach((file, index) => {
@@ -51,10 +50,4 @@ function generateShortcut (files) {
   })
 }
 
-let files = []
-
-dirs.forEach(dir => {
-  files = files.concat(glob.sync(dir))
-})
-
-generateShortcut(files)
+generateShortcut(getComponentFiles('*.vue', true))
