@@ -1,4 +1,9 @@
-// 生成组件列表
+/**
+ * 生成组件列表
+ * + 按组件的demo生成组件列表, demo的模板如下:
+ * + <template group="xxx" type="xxx" name="xxx">
+ * + 其中type字段必须与组件对应的scss文件第一行的 /* xxx * / 相同， 会按这里的值生成组件样式映射关系图谱。
+ */
 const fs = require('fs')
 const getComponentFiles = require('./get-component-files')
 
