@@ -66,4 +66,9 @@ router.post('/api/css', function (req, res, next) {
   })
 })
 
+// 增加一个项目
+router.post('/api/projects', function (req, res, next) {
+
+})
+
 module.exports = router
