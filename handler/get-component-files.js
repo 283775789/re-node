@@ -5,13 +5,13 @@ const glob = require('glob')
 
 if (type === 'web') {
   dirs = [
-    'teewon/apps/web/src/static/style/modules/**/',
-    'teewon/apps/web/src/assemblies/components/**/'
+    'teewon/templates/web/default/src/static/style/modules/**/',
+    'teewon/templates/web/default/src/assemblies/components/**/'
   ]
 } else if (type === 'mobile') {
   dirs = [
-    'teewon/apps/mobile/src/static/style/modules/**/',
-    'teewon/apps/mobile/src/assemblies/components/**/'
+    'teewon/templates/mobile/default/src/static/style/modules/**/',
+    'teewon/templates/mobile/default/src/assemblies/components/**/'
   ]
 }
 

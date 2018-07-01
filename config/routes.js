@@ -5,6 +5,8 @@ const fs = require('fs')
 const sass = require('node-sass')
 const scss = require('../handler/scss')
 const markdown = require('../handler/markdown')
+const config = require('../config')
+const ncp = require('ncp')
 const uid = 0
 
 router.get('/', function (req, res, next) {
@@ -33,9 +35,9 @@ router.get('/api/docs/:type/:name', function (req, res, next) {
   if (req.params.type === 'guid') {
     filePath = `docs/guides`
   } else if (req.params.type === 'css') {
-    filePath = `teewon/apps/web/src/static/style/modules/${name}`
+    filePath = `teewon/templates/web/default/src/static/style/modules/${name}`
   } else if (req.params.type === 'comps') {
-    filePath = `teewon/apps/web/src/assemblies/components/${name}`
+    filePath = `teewon/templates/web/default/src/assemblies/components/${name}`
   }
 
   fs.readFile(`${filePath}/${name}.md`, 'utf-8', (e, data) => {
@@ -66,9 +68,31 @@ router.post('/api/css', function (req, res, next) {
   })
 })
 
-// 增加一个项目
-router.post('/api/projects', function (req, res, next) {
+// 增加一个前置项目
+router.post('/api/pre-projects', function (req, res, next) {
+  const {name, version, developers, type, svn, document} = req.body
+  const projectTemplate = req.body.type === 'web' && config.path.project.web.defaultTemplatePath
+  const prePorjectPath = (req.body.type === 'web' && config.path.project.web.prePath) + `/${name}-${version}`
+  const packageFile = req.body.type === 'web' && config.path.project.web.packageTemplate
 
+  try {
+    fs.mkdirSync(prePorjectPath)
+
+    if (req.body.type === 'web') {
+      ncp(projectTemplate, prePorjectPath, function (err) {
+        if (err) {
+          return console.error(err)
+        }
+
+        const packageContent = require('../' + packageFile)
+        packageContent.teewon = {name, version, developers, type, svn, document}
+        fs.writeFileSync(`${prePorjectPath}/package.json`, JSON.stringify(packageContent, null, 2))
+        res.send(config.msg.success.preProject)
+      })
+    }
+  } catch (err) {
+    res.status(500).send(config.msg.error.preProject)
+  }
 })
 
 module.exports = router
