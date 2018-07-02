@@ -19,9 +19,10 @@ module.exports = {
     }
   },
   app: {
-    templateStylePath: '/src/static/style',
-    templateStyleModulesPath: '/src/static/style/modules',
-    templateAssembliesPath: '/src/assemblies',
-    templateCompsPath: '/src/assemblies/components'
+    stylePath: '/src/static/style',
+    styleModulesPath: '/src/static/style/modules',
+    assembliesPath: '/src/assemblies',
+    compsPath: '/src/assemblies/components',
+    scssVariable: '/src/static/style/base/_variables.scss'
   }
 }

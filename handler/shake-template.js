@@ -7,11 +7,11 @@ const dirs = [
   config.path.project.web.defaultTemplatePath + '/src/components/**',
   config.path.project.web.defaultTemplatePath + '/src/components',
   config.path.project.web.defaultTemplatePath + '/package.json',
-  config.path.project.web.defaultTemplatePath + config.path.app.templateAssembliesPath + '/**/*.md',
-  config.path.project.web.defaultTemplatePath + config.path.app.templateStylePath + '/**/*.+(md|vue)',
-  config.path.project.web.defaultTemplatePath + config.path.app.templateCompsPath + '/**/demo/*.vue',
-  config.path.project.web.defaultTemplatePath + config.path.app.templateCompsPath + '/**/demo',
-  config.path.project.web.defaultTemplatePath + config.path.app.templateStyleModulesPath + '/**/'
+  config.path.project.web.defaultTemplatePath + config.path.app.assembliesPath + '/**/*.md',
+  config.path.project.web.defaultTemplatePath + config.path.app.stylePath + '/**/*.+(md|vue)',
+  config.path.project.web.defaultTemplatePath + config.path.app.compsPath + '/**/demo/*.vue',
+  config.path.project.web.defaultTemplatePath + config.path.app.compsPath + '/**/demo',
+  config.path.project.web.defaultTemplatePath + config.path.app.styleModulesPath + '/**/'
 ]
 
 dirs.forEach(dir => {

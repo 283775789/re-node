@@ -70,23 +70,28 @@ router.post('/api/css', function (req, res, next) {
 
 // 增加一个前置项目
 router.post('/api/pre-projects', function (req, res, next) {
-  const {name, version, developers, type, svn, document} = req.body
-  const projectTemplate = req.body.type === 'web' && config.path.project.web.defaultTemplatePath
-  const prePorjectPath = (req.body.type === 'web' && config.path.project.web.prePath) + `/${name}-${version}`
-  const packageFile = req.body.type === 'web' && config.path.project.web.packageTemplate
+  const {name, version, developers, type, svn, document} = req.body.project
+  const projectTemplate = type === 'web' && config.path.project.web.defaultTemplatePath
+  const prePorjectPath = (type === 'web' && config.path.project.web.prePath) + `/${name}-${version}`
+  const packageFile = type === 'web' && config.path.project.web.packageTemplate
 
   try {
     fs.mkdirSync(prePorjectPath)
 
-    if (req.body.type === 'web') {
+    if (type === 'web') {
       ncp(projectTemplate, prePorjectPath, function (err) {
         if (err) {
           return console.error(err)
         }
 
+        // 生成packageContent
         const packageContent = require('../' + packageFile)
         packageContent.teewon = {name, version, developers, type, svn, document}
         fs.writeFileSync(`${prePorjectPath}/package.json`, JSON.stringify(packageContent, null, 2))
+
+        // 生成variable.scss
+        fs.appendFileSync(`${prePorjectPath}/${config.path.app.scssVariable}`, scss.createScss(req.body.scssVars))
+
         res.send(config.msg.success.preProject)
       })
     }
