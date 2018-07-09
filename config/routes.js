@@ -92,6 +92,9 @@ router.post('/api/pre-projects', function (req, res, next) {
         // 生成variable.scss
         fs.appendFileSync(`${prePorjectPath}/${config.path.app.scssVariable}`, scss.createScss(req.body.scssVars))
 
+        // 保存全局设计配置用了哪些组件:design.json
+        fs.writeFileSync(`${prePorjectPath}/design.json`, JSON.stringify(req.body.comps, null, 2))
+
         res.send(config.msg.success.preProject)
       })
     }
