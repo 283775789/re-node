@@ -20,6 +20,13 @@ app.use('/docs/config', express.static(path.join(__dirname, 'docs/config')))
 app.use('/docs', express.static(path.join(__dirname, 'docs')))
 app.use('/data', express.static(path.join(__dirname, 'data')))
 
+app.all('*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', '*')
+  next()
+})
+
 app.use('/', router)
 
 app.listen(83, function () {

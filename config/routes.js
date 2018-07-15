@@ -27,6 +27,10 @@ router.get('/api/scss-vars', function (req, res, next) {
   })
 })
 
+router.options('*', function (req, res, next) {
+  res.send()
+})
+
 // 处理所有的组件文档
 router.get('/api/docs/:type/:name', function (req, res, next) {
   const name = req.params.name
