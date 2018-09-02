@@ -7,6 +7,7 @@ module.exports = {
       templatePath: 'teewon/templates/web',
       defaultTemplatePath: 'teewon/templates/web/default',
       scssTemplatePath: 'teewon/scss/web-variables.scss',
+      components: 'teewon/components/web.js',
       shortcutPath: 'teewon/shortcut/web/vue-html.json'
     },
     mobile: {
@@ -15,6 +16,7 @@ module.exports = {
       templatePath: 'teewon/templates/mobile',
       defaultTemplatePath: 'teewon/templates/mobile/default',
       scssTemplatePath: 'teewon/scss/mobile-variables.scss',
+      components: 'teewon/components/mobile.js',
       shortcutPath: 'teewon/shortcut/mobile/vue-html.json'
     }
   },

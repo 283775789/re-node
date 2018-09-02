@@ -42,6 +42,8 @@ router.get('/api/docs/:type/:name', function (req, res, next) {
     filePath = `teewon/templates/web/default/src/static/style/modules/${name}`
   } else if (req.params.type === 'comps') {
     filePath = `teewon/templates/web/default/src/assemblies/components/${name}`
+  } else if (req.params.type === 'directives') {
+    filePath = `teewon/templates/web/default/src/assemblies/directives/${name}`
   }
 
   fs.readFile(`${filePath}/${name}.md`, 'utf-8', (e, data) => {
@@ -70,6 +72,19 @@ router.post('/api/css', function (req, res, next) {
       res.send(result.css.toString())
     }
   })
+})
+
+// 获取组件列表
+router.get('/api/components/:type', function (req, res, next) {
+  let components
+
+  if (req.params.type === 'web') {
+    components = require('../' + config.path.project.web.components)
+  } else if (req.params.type === 'mobile') {
+    components = require('../' + config.path.project.mobile.components)
+  }
+
+  res.send(JSON.stringify(components))
 })
 
 // 增加一个前置项目

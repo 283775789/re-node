@@ -3,7 +3,7 @@ const fs = require('fs')
 
 module.exports = function (data, filePath, name, type) {
   if (!data) return
-  if (type === 'comps') filePath += '/demo'
+  if (type === 'comps' || type === 'directives') filePath += '/demo'
 
   const dataRows = data.split('\n')
 

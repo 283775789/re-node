@@ -34,6 +34,10 @@ function generateComponentsList (files) {
       }
     } else {
       group[groupName] = {}
+      console.log(typeName)
+      if (typeName === '头部') {
+        debugger
+      }
       group[groupName][typeName] = {
         demos: [demoObj]
       }
